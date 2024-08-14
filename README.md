@@ -1,55 +1,62 @@
-# Predictive Analysis Competition Project
+# Predictive Analysis Competition Project (PAC)
 
 ## Overview
 
-This project was part of a predictive analysis competition, where the objective was to predict the popularity rating of songs using various auditory features. The dataset provided contained approximately 20,000 popular songs, each with a variety of features such as track duration, explicitness, key, and tempo.
+This project was part of a Predictive Analysis Competition (PAC) aimed at predicting the popularity rating of songs using auditory features. The dataset provided contained approximately 20,000 popular songs, each with various features such as track duration, explicitness, key, and tempo.
 
-## Project Goal
+## Goal
 
-The goal of this project was to build a predictive model to estimate the popularity rating of songs. The model was evaluated based on Root Mean Squared Error (RMSE) on a hidden test set. The competition was hosted on Kaggle, and participants were ranked on a leaderboard based on the performance of their models.
+The objective was to build a predictive model to estimate the song popularity ratings. The model was evaluated based on Root Mean Squared Error (RMSE) on a hidden test set, with the competition hosted on Kaggle.
 
 ## Methodology
 
 ### 1. Data Exploration and Preparation
 
-- **Data Cleaning**: Handled missing values and ensured data consistency.
-- **Feature Engineering**: Explored different transformations of the variables to improve model performance.
-- **Data Splitting**: The data was split into training and test sets using a 70:30 ratio to validate the model performance.
+- **Data Cleaning**: 
+  - Used `sum(is.na(songs))` from the `dplyr` library to identify and handle missing values.
+  - Applied data type transformations for specific variables (e.g., `as.numeric(track_duration)`, `as.factor(mode)`).
+
+- **Feature Selection**:
+  - Focused on key predictors such as `track_duration`, `track_explicit`, `key`, and `tempo`.
+  - Emphasized selecting variables that could effectively serve as indicators for song ratings.
+
+- **Data Splitting**:
+  - Split the data into a 70:30 ratio using the `createDataPartition` function and set the seed to 1031 for reproducibility.
 
 ### 2. Model Building and Tuning
 
-- **Model Selection**: Different models such as Linear Regression, Gradient Boosting, and Random Forest were explored.
-- **Hyperparameter Tuning**: Models were fine-tuned to improve performance. Grid search and cross-validation techniques were used to find the best parameters.
-- **Boosting Model**: The final model was built using a boosting technique from the `gbm` library, which provided the best results in terms of RMSE.
+- **Model Selection**:
+  - Explored multiple models including Linear Regression and Boosting models.
+  - The Boosting model (`gbm` library) was chosen for its ability to sequentially grow trees based on previous ones, leading to more accurate predictions.
 
-### 3. Evaluation
+- **Hyperparameter Tuning**:
+  - Tuned model parameters for optimal performance, focusing on reducing the RMSE.
 
-- **Model Comparison**: Various models were compared based on their RMSE.
-- **Error Analysis**: Analyzed the errors to understand where the model performed well and where it struggled.
+### 3. Evaluation and Results
 
-## Results
-
-- **Final Model**: The final model was a Gradient Boosting model which achieved the lowest RMSE on the test set.
-- **Kaggle Submission**: Multiple submissions were made to Kaggle to optimize and refine the model. The final RMSE achieved was [insert RMSE here].
-
-## Challenges and Improvements
+- **Final Model**:
+  - The Boosting model achieved the best performance with the lowest RMSE on the test set.
+  - The model's success was attributed to its effective handling of dependent variables and sequential tree-building approach.
 
 - **Challenges**:
-  - Handling categorical variables such as performer and genre.
-  - Managing data mismatches between training and scoring datasets.
+  - Difficulty in incorporating categorical variables like `performer` and `genre` into the model without causing mismatches with the scoring dataset.
+  - Issues with the `ranger` function leading to unexpected column outputs and difficulties in finding the "rating" variable.
+
 - **Improvements**:
-  - Exploring multimodal prediction by incorporating additional dimensions of data.
-  - Applying the model to different datasets and industries such as marketing and strategic decision-making.
+  - Future iterations could benefit from a multimodal prediction approach, integrating more dimensions (e.g., product branding, aesthetics).
+  - The model has potential applications in marketing and strategic decision-making, particularly in predicting consumer preferences.
 
-## Conclusion
+## Deliverables
 
-This project provided valuable insights into the predictive modeling process, from data exploration to model tuning and evaluation. The model developed has potential applications in real-life scenarios, including marketing campaigns and strategic business decisions.
+- **Predictions**: Multiple submissions were made on Kaggle, with continuous improvements leading to the final model.
+- **Presentation**: Summarized the project’s successes, challenges, and potential improvements (see `PAC Slide - Jianfei Shi.pptx`).
+- **Report**: A detailed report documenting the analysis process, including both successful and unsuccessful modeling attempts (see `PAC Report - Jianfei Shi.txt`).
 
 ## Files
 
 - `model13.R`: R script containing the code for data cleaning, model building, and evaluation.
-- `PAC Report - Jianfei Shi.txt`: Detailed report on the project, including methodology, results, and reflections.
-- `PAC Slide - Jianfei Shi.pptx`: Presentation slide summarizing the project’s successes, challenges, and potential improvements.
+- `PAC Report - Jianfei Shi.txt`: Comprehensive report on the project, including methodology, results, and reflections.
+- `PAC Slide - Jianfei Shi.pptx`: Presentation slide summarizing the project's key points.
 
 ## How to Use
 
@@ -66,4 +73,4 @@ This project provided valuable insights into the predictive modeling process, fr
 
 ## Acknowledgements
 
-This project was completed as part of a predictive analysis competition. Special thanks to the course instructors for their guidance and support.
+This project was completed under the guidance of David Shilane. The data was curated specifically for the PAC and is intended solely for educational use in this course.
